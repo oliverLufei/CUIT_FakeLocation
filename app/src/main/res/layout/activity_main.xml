@@ -78,6 +78,15 @@
                 android:layout_height="60dp"
                 android:text="羽毛球场\n103.985687, 30.583347"
                 android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/lquanField"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                android:text="龙泉操场\n104.305854, 30.606917"
+                android:textSize="12sp" />
+
         </LinearLayout>
 
         <!-- 分割线 -->

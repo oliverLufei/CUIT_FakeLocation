@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnBasketball1.setOnClickListener { startMock(103.985773, 30.581551, "第一篮球场") }
         binding.btnBasketball2.setOnClickListener { startMock(103.985779, 30.582454, "第二篮球场") }
         binding.btnBadminton.setOnClickListener { startMock(103.985687, 30.583347, "羽毛球场") }
+        binding.lquanField.setOnClickListener { startMock(104.305854, 30.606917, "龙泉操场") }
 
         binding.btnApplyCustom.setOnClickListener {
             val lon = binding.etLon.text.toString().toDoubleOrNull()
