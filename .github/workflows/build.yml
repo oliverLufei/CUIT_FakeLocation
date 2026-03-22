@@ -1,1 +1,50 @@
+name: Build Android APK
 
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. 检出代码
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    # 2. 设置JDK 17（Android要求）
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    # 3. 设置Android SDK
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+    
+    # 4. 接受Android SDK许可证（必需）
+    - name: Accept Android SDK licenses
+      run: |
+        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+    
+    # 5. 构建APK
+    - name: Build with Gradle
+      run: |
+        chmod +x ./gradlew
+        ./gradlew assembleDebug
+        
+    # 6. 上传APK作为构建产物
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: FakeLocation-APK
+        path: |
+          app/build/outputs/apk/debug/*.apk
+          app/build/outputs/apk/release/*.apk
+        if-no-files-found: error
+        retention-days: 7
